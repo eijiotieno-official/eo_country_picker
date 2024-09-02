@@ -34,17 +34,23 @@ class _ExampleState extends State<Example> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            if (_selectedCountry != null) Text(_selectedCountry.toString()),
+            if (_selectedCountry != null)
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(_selectedCountry.toString()),
+              ),
             FilledButton(
               onPressed: () async {
-                final result = await CountryPicker.open(context);
+                final result = await CountryPicker.open(
+                  context: context,
+                );
                 if (result != null) {
                   setState(() {
                     _selectedCountry = result;
                   });
                 }
               },
-              child: Text("Pick a Country"),
+              child: const Text("Pick a Country"),
             ),
           ],
         ),
