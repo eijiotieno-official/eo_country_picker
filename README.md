@@ -1,39 +1,57 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# EO Country Picker
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+A Flutter package that allows users to pick a country and retrieve its name, flag, ISO code, and dialing code. This package is perfect for apps that require users to input or select their country, such as phone number input fields.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- Retrieve country name, flag emoji, ISO code, and dialing code.
+- Simple and easy-to-use API.
+- Supports country selection and retrieval.
+  
+## Installation
 
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+```sh
+flutter pub add eo_country_picker
 ```
 
-## Additional information
+## Import
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```dart
+import 'package:eo_country_picker/eo_country_picker.dart';
+```
+
+```dart
+FilledButton(
+    onPressed: () async {
+    final result = await CountryPicker.open(context: context);
+    if (result != null) {
+        setState(() {
+        _selectedCountry = result;
+        });
+    }
+    },
+    child: const Text("Pick a Country"),
+),
+```
+## Screenshots
+
+  <div style="border: 1px solid #ccc; padding: 1px; display: inline-block; margin-right: 10px;">
+    <p style="text-align: center; margin-top: 10px; margin-bottom: 10px;">All Countries</p>
+    <img src="screenshots/Screenshot_20240910-143220.png" alt="All Countries" width="300">
+  </div>
+
+  <div style="border: 1px solid #ccc; padding: 1px; display: inline-block;">
+    <p style="text-align: center; margin-top: 10px; margin-bottom: 10px;">Search Results</p>
+    <img src="screenshots/Screenshot_20240910-143234.png" alt="Search Results" width="300">
+  </div>
+
+  <div style="border: 1px solid #ccc; padding: 1px; display: inline-block;">
+    <p style="text-align: center; margin-top: 10px; margin-bottom: 10px;">Picked Country</p>
+    <img src="screenshots/Screenshot_20240910-143240.png" alt="Picked Country" width="300">
+  </div>
+
+## Contributing
+
+We welcome contributions from the Flutter community to further enhance and
+improve our custom media picker. Whether it's bug fixes, feature enhancements,

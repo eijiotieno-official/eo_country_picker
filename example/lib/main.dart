@@ -41,9 +41,7 @@ class _ExampleState extends State<Example> {
               ),
             FilledButton(
               onPressed: () async {
-                final result = await CountryPicker.open(
-                  context: context,
-                );
+                final result = await CountryPicker.open(context: context);
                 if (result != null) {
                   setState(() {
                     _selectedCountry = result;
