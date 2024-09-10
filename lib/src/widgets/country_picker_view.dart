@@ -50,83 +50,74 @@ class _CountryPickerViewState extends State<CountryPickerView> {
     final countries =
         _searchResult.isNotEmpty ? _searchResult : _loadedCountries;
 
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle(
-        systemNavigationBarColor: widget.backgroundColor,
-        systemNavigationBarIconBrightness:
-            Theme.of(context).brightness == Brightness.dark
-                ? Brightness.light
-                : Brightness.dark,
-      ),
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.75,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                controller: _searchController,
-                autofocus: false,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  labelText: "Search name or dial",
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.75,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextField(
+              controller: _searchController,
+              autofocus: false,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
                 ),
-                onChanged: (v) {
-                  _search();
-                },
+                labelText: "Search name or dial",
               ),
+              onChanged: (v) {
+                _search();
+              },
             ),
-            Expanded(
-              child: countries.isEmpty
-                  ? const Center(
-                      child: CircularProgressIndicator(
-                        strokeCap: StrokeCap.round,
-                      ),
-                    )
-                  : ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: countries.length,
-                      itemBuilder: (context, index) {
-                        final country = countries[index];
-                        return ListTile(
-                          onTap: () {
-                            SystemChrome.setSystemUIOverlayStyle(
-                              const SystemUiOverlayStyle(
-                                systemNavigationBarColor: null,
-                              ),
-                            );
-
-                            Navigator.pop(context, country);
-                          },
-                          leading: Text(
-                            country.flag,
-                            style: TextStyle(
-                              fontSize: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge
-                                  ?.fontSize,
-                            ),
-                          ),
-                          title: Text(country.name),
-                          trailing: Text(
-                            country.dial,
-                            style: TextStyle(
-                              fontSize: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium
-                                  ?.fontSize,
-                              color: widget.themeColor,
-                            ),
-                          ),
-                        );
-                      },
+          ),
+          Expanded(
+            child: countries.isEmpty
+                ? const Center(
+                    child: CircularProgressIndicator(
+                      strokeCap: StrokeCap.round,
                     ),
-            ),
-            SizedBox(height: MediaQuery.of(context).viewInsets.bottom),
-          ],
-        ),
+                  )
+                : ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: countries.length,
+                    itemBuilder: (context, index) {
+                      final country = countries[index];
+                      return ListTile(
+                        onTap: () {
+                          // SystemChrome.setSystemUIOverlayStyle(
+                          //   const SystemUiOverlayStyle(
+                          //     systemNavigationBarColor: null,
+                          //   ),
+                          // );
+    
+                          Navigator.pop(context, country);
+                        },
+                        leading: Text(
+                          country.flag,
+                          style: TextStyle(
+                            fontSize: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.fontSize,
+                          ),
+                        ),
+                        title: Text(country.name),
+                        trailing: Text(
+                          country.dial,
+                          style: TextStyle(
+                            fontSize: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.fontSize,
+                            color: widget.themeColor,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+          ),
+          SizedBox(height: MediaQuery.of(context).viewInsets.bottom),
+        ],
       ),
     );
   }
